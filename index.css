@@ -1,8 +1,9 @@
 #xep-bau-cua img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border: 1px solid black;
     cursor: pointer;
+    padding: 20px;
 
 }
 
@@ -11,33 +12,34 @@
 }
 
 #xep-bau-cua{
-    margin-left: 30%;
+    margin-left: 22%;
     margin-top: 10%;
 }
 
 
 
 #ket-qua-bau-cua img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border: 1px solid black;
     cursor: pointer;
 }
 
 #ket-qua-bau-cua{
-    margin-left: 40%;
+    margin-left: 35%;
     margin-top: 5%;
 }
 
 .so-bau-cua{
     position: absolute;
     font-size:12px;
-    background-color:black;
+    /* background-color:black; */
     width:20px;
     height:20px;
-    color:#fff;
+    color:black;
     margin-top: -5px;
     padding-left: 4px;
+    font-size: 24px;
     padding-bottom: 4px;
     }
 
