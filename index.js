@@ -264,7 +264,7 @@ const shuffleKetQua = () => {
         document.getElementById("datLai").disabled = false;
 
 
-    }, 1000);
+    }, 5000);
   
 }
 let counter = 3;
