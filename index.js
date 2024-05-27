@@ -4,7 +4,8 @@ const bauCuaList = [
         img: "./images/bau.png",
         count : 0,
         selected: false,
-        name: "Bầu"
+        name: "Bầu",
+        counter: 0
 
     },
     {
@@ -13,6 +14,7 @@ const bauCuaList = [
         count : 0,
         selected: false,
         name: "Cá"
+,        counter: 0
 
     },    
     {
@@ -21,6 +23,7 @@ const bauCuaList = [
         count : 0,
         selected: false,
         name: "Cua"
+        ,        counter: 0
 
     },   
      {
@@ -30,6 +33,7 @@ const bauCuaList = [
         selected: false,
         name: "Gà"
 
+        ,        counter: 0
 
     },   
      {
@@ -39,6 +43,7 @@ const bauCuaList = [
         selected: false, 
         name: "Hươu"
 
+        ,        counter: 0
 
     }, 
        {
@@ -47,6 +52,8 @@ const bauCuaList = [
         count : 0,
         selected: false,
         name: "Tôm"
+        ,        counter: 0
+
     }
 ]
 
@@ -57,6 +64,8 @@ let shuffleArray = [
         count : 0,
         selected: false,
         name: "Bầu"
+        ,        counter: 0
+
     },
     {
         id: 2,
@@ -64,6 +73,7 @@ let shuffleArray = [
         count : 0,
         selected: false,
         name: "Cá"
+        ,        counter: 0
 
     },    
     {
@@ -72,6 +82,7 @@ let shuffleArray = [
         count : 0,
         selected: false,
         name: "Cua"
+        ,        counter: 0
 
     },   
      {
@@ -80,6 +91,7 @@ let shuffleArray = [
         count : 0,
         selected: false,
         name: "Gà"
+        ,        counter: 0
 
     },   
      {
@@ -88,6 +100,7 @@ let shuffleArray = [
         count : 0,
         selected: false,
         name: "Hươu"
+        ,        counter: 0
 
     }, 
        {
@@ -96,6 +109,8 @@ let shuffleArray = [
         count : 0,
         selected: false,
         name: "Tôm"
+        ,        counter: 0
+
     }
 ]
 
@@ -152,30 +167,71 @@ const shuffleKetQua = () => {
         document.getElementById("ket-qua-in-chu").innerHTML = ``;
         let matchArray= []
         let ketQuaGhiChu = ``
+    
+        for(let i = 0 ; i < 3; i++){
+            let randomIndex = Math.floor(Math.random() * 6);
+            shuffleArray.push(bauCuaList[randomIndex]);
+            }
+
+        let resultImages = `
+        <img id="so-bau-cua-${shuffleArray[0].id}"src=${shuffleArray[0].img} alt=""/>
+        <img id="so-bau-cua-${shuffleArray[1].id}"src=${shuffleArray[ 1].img} alt=""/>
+        <img id="so-bau-cua-${shuffleArray[2].id}"src=${shuffleArray[ 2].img} alt=""/>
+
+    `
+        document.getElementById("ket-qua-bau-cua").innerHTML = resultImages;
+        // shuffleArray = []
+        //     shuffleArray = [    {
+        //     id: 1,
+        //     img: "./images/bau.png",
+        //     count : 0,
+        //     selected: false,
+        //     name: "Bầu"
+        //     ,        counter: 0
+    
+        // },
+        // {
+        //   id: 1,
+        //     img: "./images/bau.png",
+        //     count : 0,
+        //     selected: false,
+        //     name: "Bầu"
+        //     ,        counter: 0
+    
+        // },  {
+        //    id: 1,
+        //     img: "./images/bau.png",
+        //     count : 0,
+        //     selected: false,
+        //     name: "Bầu"
+        //     ,        counter: 0
+    
+        // }];
+        pickedArray.sort((a,b) => a.id -b.id)
+        let reducedPickedArray = pickedArray.map(pick => {return pick.id})
+        shuffleArray.sort((a,b) => a.id - b.id)
+        let reducedShuffleArray = shuffleArray.map(shuffle => {return shuffle.id});
         for(let i = 0; i < pickedArray.length; i++){
             ketQuaGhiChu += pickedArray[i].name + " 1 ";
-            for(let j = 0; j < 3; j++){
-                if(pickedArray[i].id === shuffleArray[j].id && pickedArray[i].selected){
-                    matchArray.push(true)
-                } else {
-
-                }
-            }
+            
         }
         for(let i = 0; i < pickedArray.length; i++){
-            if(matchArray.length < 3){
-                document.getElementById("ket-qua-in-chu").innerHTML = "Bạn đã đoán sai với kết quả: " + ketQuaGhiChu;
-                document.getElementById("ket-qua-in-chu").style.color = "red";
-                console.log("Bạn đã đoán sai với kết quả: " + ketQuaGhiChu);
+
+            if(JSON.stringify(reducedPickedArray) !== JSON.stringify(reducedShuffleArray)){
+                
+            document.getElementById("ket-qua-in-chu").innerHTML = "Bạn đã đoán sai với kết quả: " + ketQuaGhiChu;
+            document.getElementById("ket-qua-in-chu").style.color = "red";
+            console.log("Bạn đã đoán sai với kết quả: " + ketQuaGhiChu);
+
                 return;
             } else {
             }
         }
 
-                
         document.getElementById("ket-qua-in-chu").innerHTML = "Bạn đã đoán đúng với kết quả:" + ketQuaGhiChu;
         document.getElementById("ket-qua-in-chu").style.color = "green";
         console.log("Bạn đã đoán đúng với kết quả:" + ketQuaGhiChu);
+                
     }
     let shuffleInterval = setInterval(function(){
                 // while(counter > 0){
@@ -195,7 +251,7 @@ const shuffleKetQua = () => {
                         
                     }
                    counter--;
-                // }
+                // }fh
                
             }
     , 100)
@@ -203,11 +259,12 @@ const shuffleKetQua = () => {
     setTimeout(function(){
         clearInterval(shuffleInterval)
         compareResult();
+       
         document.getElementById("quay").disabled = false;
         document.getElementById("datLai").disabled = false;
 
 
-    }, 5000);
+    }, 1000);
   
 }
 let counter = 3;
@@ -215,25 +272,25 @@ let counter = 3;
 
 const xepBauCua = () => {
     document.getElementById("xep-bau-cua").innerHTML = ``
-
     for(let i = 0 ; i < bauCuaList.length; i++){
         let bauCua = bauCuaList[i];
         document.getElementById("xep-bau-cua").innerHTML += `
         <div class="order">
-        <p id="so-bau-cua-${bauCua.id}" value="0" class="so-bau-cua">${bauCua.selected ? 1 : 0 }</p>
+        <p id="so-bau-cua-${bauCua.id}"  class="so-bau-cua">${bauCua.counter}</p>
         <img id="hinh-anh-${bauCua.img}" src=${bauCua.img} alt="" onclick="clickOnImage(${bauCua.id})"/>
         </div>
 `
     window.clickOnImage = (id) => {
-        for(let i = 0; i < pickedArray.length; i++){
-            if(pickedArray[i].id === bauCuaList[id-1].id){
-                return;
-            }
-        }
+        // for(let i = 0; i < pickedArray.length; i++){
+        //     if(pickedArray[i].id === bauCuaList[id-1].id){
+        //         return;
+        //     }
+        // }
         if(counter > 0 && document.getElementById(`so-bau-cua-${id}`).value !== 1){
 
             bauCuaList[id-1].match = false;
-            
+            bauCuaList[id-1].counter++;
+            document.getElementById(`so-bau-cua-${id}`).innerHTML++
             pickedArray.push(bauCuaList[id-1]);
             bauCuaList[id-1].selected = true;
             counter--;
@@ -253,8 +310,11 @@ const datLai = () => {
     document.getElementById("ket-qua-in-chu").innerHTML = "";
     for(let i = 0 ; i < bauCuaList.length; i++){
         bauCuaList[i].selected = false;
+        bauCuaList[i].counter = 0;
 
     };
+
+    
     xepBauCua();
 
 
